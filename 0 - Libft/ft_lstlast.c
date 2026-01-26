@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 20:26:23 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/01/26 19:24:48 by davidsousao      ###   ########.fr       */
+/*   Created: 2026/01/26 19:05:53 by davidsousao       #+#    #+#             */
+/*   Updated: 2026/01/26 19:06:01 by davidsousao      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strlen(const char *s)
+t_list  *ft_lstlast(t_list *lst)
 {
-    int i;
-
-    i = 0;
-    while (s[i] != '\0')
-        i++;
-    return (i);
+    if (!lst)
+        return (0);
+    while (lst->next)
+        lst = lst->next;
+    return (lst);
 }

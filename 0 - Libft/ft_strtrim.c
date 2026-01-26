@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsousa-o <dsousa-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 19:41:02 by davidsousao       #+#    #+#             */
-/*   Updated: 2026/01/21 19:51:39 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/01/26 19:52:55 by davidsousao      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int is_set(char c, const char *set)
+#include "libft.h"
+
+static int  is_in_set(char c, char const *set)
 {
     int i;
 
@@ -19,28 +21,40 @@ int is_set(char c, const char *set)
     {
         if (set[i] == c)
             return (1);
-            i++;
+        i++;
     }
     return (0);
 }
 
-int *ft_strtrim(char const *s1, char const *set)
+char    *ft_strtrim(char const *s1, char const *set)
 {
-    int i;
-    int start;
-    int end;
-    char *sub;
+    char    *sub;
+    int     start;
+    int     end;
+    int     i;
 
-    if(!set || !s1)
-        return(0);
+    if (!s1 || !set)
+        return (0);
+
     start = 0;
-    while(s1[start] && is_set(s1[start], set))
+    while (s1[start] && is_in_set(s1[start], set))
         start++;
-    end = 0;
-    while(s1[end])
-        end++;
-    end--;
-    
-    
 
+    end = ft_strlen(s1) - 1;
+    while (end >= start && is_in_set(s1[end], set))
+        end--;
+
+    sub = (char *)malloc(end - start + 2);
+    if (!sub)
+        return (0);
+
+    i = 0;
+    while (start <= end)
+    {
+        sub[i] = s1[start];
+        i++;
+        start++;
+    }
+    sub[i] = '\0';
+    return (sub);
 }

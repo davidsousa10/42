@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsousa-o <dsousa-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 19:03:24 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/01/16 20:44:26 by dsousa-o         ###   ########.fr       */
+/*   Created: 2026/01/26 19:11:09 by davidsousao       #+#    #+#             */
+/*   Updated: 2026/01/26 19:11:13 by davidsousao      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strchr(cons char *s, int c)
+void    *ft_memchr(const void *s, int c, int n)
 {
-    int i;
-    char cc;
-    char *last;
+    int             i;
+    unsigned char   *p;
 
+    p = (unsigned char *)s;
     i = 0;
-    cc = (char) c;
-    last = NULL;
-
-    while (s[i] != '\0')
+    while (i < n)
     {
-        if(s[i] == cc)
-            last = (char*)&s[i];
-            i++
+        if (p[i] == (unsigned char)c)
+            return ((void *)&p[i]);
+        i++;
     }
-    if (c == '\0')
-        return ((char*)&s[i]);
-    return (last);
+    return (0);
 }

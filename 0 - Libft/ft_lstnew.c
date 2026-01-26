@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dsousa-o <dsousa-o@student.42.fr>          +#+  +:+       +#+        */
+/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 18:22:16 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/01/16 20:44:26 by dsousa-o         ###   ########.fr       */
+/*   Created: 2026/01/26 17:35:02 by davidsousao       #+#    #+#             */
+/*   Updated: 2026/01/26 19:02:07 by davidsousao      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_toupper(int c)
+t_list  *ft_lstnew(void *content)
 {
-    int i;
+    t_list  *node;
 
-    i = 0;
-    if(c >= 97 && c <= 122)
-        return(c - 32);
-    return(c);
+    node = (t_list *)malloc(sizeof(t_list));
+    if(!node)
+        return(0);
+    node->content = content;
+    node->next = NULL;
+    return(node);
 }

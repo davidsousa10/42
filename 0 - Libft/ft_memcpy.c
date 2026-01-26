@@ -6,13 +6,13 @@
 /*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 00:08:48 by davidsousao       #+#    #+#             */
-/*   Updated: 2026/01/16 17:18:13 by davidsousao      ###   ########.fr       */
+/*   Updated: 2026/01/26 19:31:08 by davidsousao      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void *memcpy(void *dst, const void *src, int len)
+void *ft_memcpy(void *dst, const void *src, int len)
 {
     char *d;
     const char *s;

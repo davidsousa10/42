@@ -1,71 +1,106 @@
-#include <stdio.h>
 #include "libft.h"
+#include <stdio.h>
 
-void    test_ctype(void)
+/* ==================== */
+/*  FUNCIONES AUX LIST  */
+/* ==================== */
+
+void    del(void *content)
 {
-    char tests[] = {'A', 'z', '0', '9', 'a', '-', ' ', '\n', 127, 128};
-    int i = 0;
-
-    printf("=== CTYPE TESTS ===\n");
-    printf(" char | isalpha | isdigit | isalnum | isascii | isprint\n");
-    printf("------+---------+----------+---------+----------+---------\n");
-
-    while (i < 10)
-    {
-        if (tests[i] == '\n')
-            printf("\\n   |");
-        else if (tests[i] < 32 || tests[i] > 126)
-            printf("%3d  |", tests[i]);
-        else
-            printf(" '%c'  |", tests[i]);
-
-        printf("    %d    |    %d     |    %d    |    %d     |    %d\n",
-               ft_isalpha(tests[i]),
-               ft_isdigit(tests[i]),
-               ft_isalnum(tests[i]),
-               ft_isascii(tests[i]),
-               ft_isprint(tests[i]));
-        i++;
-    }
-    printf("\n");
+    free(content);
 }
 
-void    test_strlen(void)
+void    print_list(void *content)
 {
-    printf("=== STRLEN TESTS ===\n");
-    printf("\"hola\"  -> %zu\n", ft_strlen("hola"));
-    printf("\"\"      -> %zu\n", ft_strlen(""));
-    printf("\"libft\" -> %zu\n", ft_strlen("libft"));
-    printf("\n");
+    printf("%s\n", (char *)content);
 }
 
-void    test_memset(void)
+void    *dup_content(void *content)
 {
-    char s[10] = "abcdefghi";
-
-    printf("=== MEMSET TESTS ===\n");
-    printf("before: %s\n", s);
-    ft_memset(s, 'X', 4);
-    printf("after : %s\n", s);
-    printf("\n");
+    return (ft_strdup((char *)content));
 }
 
-void    test_bzero(void)
-{
-    char s[10] = "abcdefghi";
-
-    printf("=== BZERO TESTS ===\n");
-    printf("before: %s\n", s);
-    ft_bzero(s, 5);
-    printf("after : %s\n", s);
-    printf("\n");
-}
+/* ==================== */
+/*         MAIN         */
+/* ==================== */
 
 int main(void)
 {
-    test_ctype();
-    test_strlen();
-    test_memset();
-    test_bzero();
+    /* ====== PARTE 1 ====== */
+    printf("== IS FUNCTIONS ==\n");
+    printf("isalpha('A') = %d\n", ft_isalpha('A'));
+    printf("isdigit('4') = %d\n", ft_isdigit('4'));
+    printf("isalnum('a') = %d\n", ft_isalnum('a'));
+    printf("isascii(127) = %d\n", ft_isascii(127));
+    printf("isprint(32) = %d\n\n", ft_isprint(32));
+
+    printf("== STRING / MEM ==\n");
+    printf("strlen(\"Hola\") = %d\n", ft_strlen("Hola"));
+
+    char buf[20];
+    ft_memset(buf, 'A', 5);
+    buf[5] = '\0';
+    printf("memset: %s\n", buf);
+
+    char s1[] = "Hola42";
+    char s2[10];
+    ft_memcpy(s2, s1, 7);
+    printf("memcpy: %s\n", s2);
+
+    printf("strchr: %s\n\n", ft_strchr("abcdef", 'd'));
+
+    /* ====== PARTE 2 ====== */
+    printf("== PARTE 2 ==\n");
+    char *join = ft_strjoin("Hola ", "libft");
+    printf("strjoin: %s\n", join);
+    free(join);
+
+    char *trim = ft_strtrim("  Hola 42  ", " ");
+    printf("strtrim: '%s'\n", trim);
+    free(trim);
+
+    char **split = ft_split("Hola 42 Madrid", ' ');
+    int i = 0;
+    while (split[i])
+    {
+        printf("split[%d] = %s\n", i, split[i]);
+        free(split[i]);
+        i++;
+    }
+    free(split);
+
+    char *itoa = ft_itoa(-42);
+    printf("itoa: %s\n\n", itoa);
+    free(itoa);
+
+    /* ====== FD ====== */
+    printf("== FD ==\n");
+    ft_putendl_fd("Hola por fd 1", 1);
+    ft_putnbr_fd(12345, 1);
+    ft_putchar_fd('\n', 1);
+
+    /* ====== LISTAS ====== */
+    printf("\n== LISTAS ==\n");
+
+    t_list *lst = NULL;
+
+    ft_lstadd_back(&lst, ft_lstnew(ft_strdup("Uno")));
+    ft_lstadd_back(&lst, ft_lstnew(ft_strdup("Dos")));
+    ft_lstadd_back(&lst, ft_lstnew(ft_strdup("Tres")));
+
+    printf("lstsize = %d\n", ft_lstsize(lst));
+    printf("lstlast = %s\n", (char *)ft_lstlast(lst)->content);
+
+    printf("\nIter list:\n");
+    ft_lstiter(lst, print_list);
+
+    t_list *new = ft_lstmap(lst, dup_content, del);
+
+    printf("\nMapped list:\n");
+    ft_lstiter(new, print_list);
+
+    ft_lstclear(&lst, del);
+    ft_lstclear(&new, del);
+
     return (0);
 }
