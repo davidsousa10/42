@@ -6,7 +6,7 @@
 /*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 20:26:23 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/01/26 19:24:48 by davidsousao      ###   ########.fr       */
+/*   Updated: 2026/01/30 18:56:11 by davidsousao      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int ft_strlen(const char *s)
     int i;
 
     i = 0;
-    while (s[i] != '\0')
+    while (s[i])
         i++;
     return (i);
 }
