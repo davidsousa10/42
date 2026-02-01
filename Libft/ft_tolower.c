@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
+/*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 18:22:16 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/01/26 19:33:59 by davidsousao      ###   ########.fr       */
+/*   Created: 2026/01/16 18:31:41 by dsousa-o          #+#    #+#             */
+/*   Updated: 2026/02/01 14:29:12 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_toupper(int c)
+int	ft_lower(int c)
 {
-    if(c >= 97 && c <= 122)
-        return(c - 32);
-    return(c);
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
 }

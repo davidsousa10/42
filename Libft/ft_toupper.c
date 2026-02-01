@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
+/*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 19:57:24 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/01/30 18:40:22 by davidsousao      ###   ########.fr       */
+/*   Created: 2026/01/16 18:22:16 by dsousa-o          #+#    #+#             */
+/*   Updated: 2026/02/01 14:27:19 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isalpha(int c)
+int	ft_toupper(int c)
 {
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return(1);
-	return(0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }

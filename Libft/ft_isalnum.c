@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
+/*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 18:31:41 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/01/26 19:34:15 by davidsousao      ###   ########.fr       */
+/*   Created: 2026/01/14 19:57:53 by dsousa-o          #+#    #+#             */
+/*   Updated: 2026/02/01 12:43:23 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_lower(int c)
+int	ft_isalnum(int c)
 {
-    if(c >= 65 && c <= 90)
-        return(c + 32);
-    return(c);
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
+	return (0);
 }
