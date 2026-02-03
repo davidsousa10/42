@@ -3,28 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
+/*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 00:05:23 by davidsousao       #+#    #+#             */
-/*   Updated: 2026/01/23 00:05:28 by davidsousao      ###   ########.fr       */
+/*   Created: 2026/02/02 23:56:32 by dsousa-o          #+#    #+#             */
+/*   Updated: 2026/02/03 00:03:58 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-    if (n == -2147483648)
-    {
-        write(fd, "-2147483648", 11);
-        return;
-    }
-    if (n < 0)
-    {
-        ft_putchar_fd('-', fd);
-        n = -n;
-    }
-    if (n >= 10)
-        ft_putnbr_fd(n / 10, fd);
-    ft_putchar_fd((n % 10) + '0', fd);
+	char	c;
+	long	nt;
+
+	nt = n;
+	if (n < 0)
+	{
+		write (fd, "-", 1);
+		nt = nt * -1;
+	}
+	if ((nt / 10) < 10 && nt > 9)
+	{
+		c = nt / 10 + '0';
+		write (fd, &c, 1);
+	}
+	else if (nt > 9)
+		ft_putnbr_fd (nt / 10, fd);
+	c = (nt % 10) + '0';
+	write (fd, &c, 1);
 }

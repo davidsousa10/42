@@ -3,56 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
+/*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 23:38:13 by davidsousao       #+#    #+#             */
-/*   Updated: 2026/01/26 19:55:40 by davidsousao      ###   ########.fr       */
+/*   Created: 2026/02/02 19:40:51 by dsousa-o          #+#    #+#             */
+/*   Updated: 2026/02/02 23:30:44 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int  num_len(int n)
+static int	ft_len(long nb)
 {
-    int len;
+	int	len;
 
-    len = 0;
-    if (n <= 0)
-        len = 1;
-    while (n != 0)
-    {
-        n /= 10;
-        len++;
-    }
-    return (len);
+	len = 1;
+	while (nb >= 10)
+	{
+		nb /= 10;
+		len++;
+	}
+	return (len);
 }
 
-char    *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-    char    *res;
-    long    nb;
-    int     len;
+	char	*num;
+	long	nb;
+	int		len;
 
-    nb = n;
-    len = num_len(n);
-
-    res = (char *)malloc(len + 1);
-    if (!res)
-        return (0);
-
-    res[len] = '\0';
-    if (nb == 0)
-        res[0] = '0';
-    if (nb < 0)
-    {
-        res[0] = '-';
-        nb = -nb;
-    }
-    while (nb > 0)
-    {
-        len--;
-        res[len] = (nb % 10) + '0';
-        nb /= 10;
-    }
-    return (res);
+	nb = (long)n;
+	len = 0;
+	if (nb <= 0)
+		len = 1;
+	if (nb < 0)
+		nb = -nb;
+	len += ft_len(nb);
+	num = (char *)malloc(len + 1);
+	if (!num)
+		return (NULL);
+	num[len] = '\0';
+	while (len > (n < 0))
+	{
+		len--;
+		num[len] = (nb % 10) + '0';
+		nb /= 10;
+	}
+	if (n < 0)
+		num[0] = '-';
+	return (num);
 }

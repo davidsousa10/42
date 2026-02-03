@@ -3,58 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
+/*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/20 19:41:02 by davidsousao       #+#    #+#             */
-/*   Updated: 2026/01/26 19:52:55 by davidsousao      ###   ########.fr       */
+/*   Created: 2026/02/02 19:31:53 by dsousa-o          #+#    #+#             */
+/*   Updated: 2026/02/02 19:39:51 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int  is_in_set(char c, char const *set)
+static int	is_in_set(char c, char const *set)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (set[i])
-    {
-        if (set[i] == c)
-            return (1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-char    *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-    char    *sub;
-    int     start;
-    int     end;
-    int     i;
+	char	*str;
+	int		start;
+	int		end;
+	int		i;
 
-    if (!s1 || !set)
-        return (0);
-
-    start = 0;
-    while (s1[start] && is_in_set(s1[start], set))
-        start++;
-
-    end = ft_strlen(s1) - 1;
-    while (end >= start && is_in_set(s1[end], set))
-        end--;
-
-    sub = (char *)malloc(end - start + 2);
-    if (!sub)
-        return (0);
-
-    i = 0;
-    while (start <= end)
-    {
-        sub[i] = s1[start];
-        i++;
-        start++;
-    }
-    sub[i] = '\0';
-    return (sub);
+	if (!s1 || !set)
+		return (NULL);
+	start = 0;
+	end = ft_strlen(s1) - 1;
+	while (s1[start] && is_in_set(s1[start], set))
+		start++;
+	while (end >= start && is_in_set(s1[end], set))
+		end--;
+	str = (char *)malloc(end - start + 2);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (start <= end)
+		str[i++] = s1[start++];
+	str[i] = '\0';
+	return (str);
 }
