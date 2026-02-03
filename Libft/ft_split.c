@@ -3,82 +3,99 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: davidsousaorta <davidsousaorta@student.    +#+  +:+       +#+        */
+/*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 22:59:58 by davidsousao       #+#    #+#             */
-/*   Updated: 2026/01/26 19:54:26 by davidsousao      ###   ########.fr       */
+/*   Created: 2026/02/03 18:59:37 by dsousa-o          #+#    #+#             */
+/*   Updated: 2026/02/03 19:48:08 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int  count_words(char const *s, char c)
+static char	**ft_memwords(char *s, char c)
 {
-    int i;
-    int count;
+	int		i;
+	int		num;
+	char	**split;
 
-    i = 0;
-    count = 0;
-    while (s[i])
-    {
-        while (s[i] == c)
-            i++;
-        if (s[i])
-        {
-            count++;
-            while (s[i] && s[i] != c)
-                i++;
-        }
-    }
-    return (count);
+	i = 0;
+	num = 0;
+	while (s[i] == c && s[i])
+		i++;
+	while (s[i])
+	{
+		while (s[i] != c && s[i])
+			i++;
+		num ++;
+		while (s[i] == c && s[i])
+			i++;
+	}
+	split = malloc(sizeof(char *) * (num + 1));
+	if (!split)
+		return (NULL);
+	return (split);
 }
 
-static char *get_word(char const *s, int start, int len)
+static int	ft_memsize(char **split, int num, int n)
 {
-    char    *word;
-    int     i;
-
-    word = (char *)malloc(len + 1);
-    if (!word)
-        return (0);
-    i = 0;
-    while (i < len)
-    {
-        word[i] = s[start + i];
-        i++;
-    }
-    word[i] = '\0';
-    return (word);
+	split[num] = malloc(sizeof(char) * n);
+	if (!split[num])
+	{
+		while (num >= 0)
+		{
+			free(split[num]);
+			num--;
+		}
+		free(split);
+		return (0);
+	}
+	else
+		return (1);
 }
 
-char    **ft_split(char const *s, char c)
+static int	ft_find(int n, int choose, char *s, char c)
 {
-    char    **res;
-    int     i;
-    int     j;
-    int     start;
+	int	i;
 
-    if (!s)
-        return (0);
+	i = 0;
+	if (choose > 0)
+	{
+		while (s[n] == c && s[n])
+			n++;
+		return (n);
+	}
+	else
+	{
+		while (s[n + i] != c && s[n + i])
+			i ++;
+		return (i);
+	}
+}
 
-    res = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
-    if (!res)
-        return (0);
+char	**ft_split(char const *s, char c)
+{
+	int		num;
+	char	**split;
+	int		i;
+	int		j;
 
-    i = 0;
-    j = 0;
-    while (s[i])
-    {
-        while (s[i] == c)
-            i++;
-        if (s[i])
-        {
-            start = i;
-            while (s[i] && s[i] != c)
-                i++;
-            res[j++] = get_word(s, start, i - start);
-        }
-    }
-    res[j] = 0;
-    return (res);
+	if (!s)
+		return (NULL);
+	num = 0;
+	j = 0;
+	split = ft_memwords((char *)s, c);
+	if (!split)
+		return (NULL);
+	while (s[j])
+	{
+		j = ft_find(j, 1, (char *)s, c);
+		i = ft_find(j, -1, (char *)s, c);
+		if (i > 0 && ft_memsize (split, num, i + 1) == 0)
+			return (NULL);
+		if (i > 0)
+			ft_strlcpy (split[num++], &s[j], i + 1);
+		j = j + i;
+	}
+	split[num] = NULL;
+	return (split);
 }
