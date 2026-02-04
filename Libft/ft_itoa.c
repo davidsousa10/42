@@ -6,48 +6,49 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 19:40:51 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/02/02 23:30:44 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/02/04 00:55:27 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_len(long nb)
+static int	ft_len(long n)
 {
-	int	len;
+	int	mem;
 
-	len = 1;
-	while (nb >= 10)
+	mem = 1;
+	while (n > 9)
 	{
-		nb /= 10;
-		len++;
+		n = n / 10;
+		mem++;
 	}
-	return (len);
+	return (mem);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*num;
-	long	nb;
-	int		len;
+	char		*num;
+	int			mem;
+	long		ntemp;
 
-	nb = (long)n;
-	len = 0;
-	if (nb <= 0)
-		len = 1;
-	if (nb < 0)
-		nb = -nb;
-	len += ft_len(nb);
-	num = (char *)malloc(len + 1);
+	ntemp = n;
+	mem = 0;
+	if (ntemp < 0)
+	{
+		ntemp = -ntemp;
+		mem += 1;
+	}
+	mem = mem + ft_len(ntemp);
+	num = malloc (sizeof(char) * (mem + 1));
 	if (!num)
 		return (NULL);
-	num[len] = '\0';
-	while (len > (n < 0))
+	num[mem] = '\0';
+	while (ntemp > 9)
 	{
-		len--;
-		num[len] = (nb % 10) + '0';
-		nb /= 10;
+		num[--mem] = (ntemp % 10) + '0';
+		ntemp = ntemp / 10;
 	}
+	num[--mem] = ntemp + '0';
 	if (n < 0)
 		num[0] = '-';
 	return (num);

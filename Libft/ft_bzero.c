@@ -6,15 +6,15 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 21:16:20 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/02/01 13:08:49 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/02/04 00:39:10 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *s, int n)
+void	ft_bzero(void *s, size_t n)
 {
-	int				i;
+	size_t			i;
 	unsigned char	*p;
 
 	p = (unsigned char *)s;

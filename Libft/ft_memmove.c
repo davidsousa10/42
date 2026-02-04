@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/16 00:19:40 by davidsousao       #+#    #+#             */
-/*   Updated: 2026/02/01 13:54:59 by dsousa-o         ###   ########.fr       */
+/*   Created: 2026/02/04 01:01:32 by dsousa-o          #+#    #+#             */
+/*   Updated: 2026/02/04 01:10:40 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,20 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 	unsigned char		*d;
 	const unsigned char	*s;
 
+	if (!dst && !src)
+		return (NULL);
+	if (n == 0 || dst == src)
+		return (dst);
 	d = (unsigned char *)dst;
 	s = (const unsigned char *)src;
-	if (!dst && !src)
-		return (0);
 	if (d > s)
 	{
-		d = d + n - 1;
-		s = s + n - 1;
-		while (n > 0)
-		{
-			*d = *s;
-			d--;
-			s--;
-			n--;
-		}
+		while (n--)
+			d[n] = s[n];
 	}
 	else
-		ft_memcpy (dst, src, n);
+	{
+		ft_memcpy(dst, src, n);
+	}
 	return (dst);
 }
