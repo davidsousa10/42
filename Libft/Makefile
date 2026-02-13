@@ -25,7 +25,7 @@ RM = rm -f
 .PHONY: all clean fclean re
 
 all: $(NAME)
-bonus: ${NAME}
+#bonus: ${NAME}
 #library
 $(NAME): $(OBJ)
 	$(AR) $@ $^
