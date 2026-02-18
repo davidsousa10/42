@@ -6,7 +6,7 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 23:46:24 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/02/17 00:01:52 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/02/18 19:38:12 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,28 @@
 
 static char	*read_to_save(int fd, char *save)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	char	*buffer;
 	ssize_t	bytes;
 
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (free(save), NULL);
 	bytes = 1;
 	while (!ft_strchr(save, '\n') && bytes > 0)
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes < 0)
 		{
+			free(buffer);
 			free(save);
 			return (NULL);
 		}
 		buffer[bytes] = '\0';
 		save = ft_strjoin(save, buffer);
 		if (!save)
-			return (NULL);
+			return (free(buffer), NULL);
 	}
+	free(buffer);
 	return (save);
 }
 
@@ -82,7 +87,7 @@ char	*get_next_line(int fd)
 	static char	*save;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (gnl_fail(&save));
 	save = read_to_save(fd, save);
 	if (!save)
