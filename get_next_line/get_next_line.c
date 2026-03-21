@@ -6,9 +6,10 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 23:46:24 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/02/18 19:38:12 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/03/21 11:45:41 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "get_next_line.h"
 
@@ -86,7 +87,11 @@ char	*get_next_line(int fd)
 {
 	static char	*save;
 	char		*line;
+<<<<<<< HEAD
 
+=======
+xq
+>>>>>>> 0e6e6b3 (push swap)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (gnl_fail(&save));
 	save = read_to_save(fd, save);
