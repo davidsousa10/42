@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(brew install:*)",
+      "Bash(pdftoppm -h)",
+      "Bash(pdftotext /Users/davidsousaorta/Documents/42/42school/push_swap/es.subject.pdf -)"
+    ]
+  }
+}

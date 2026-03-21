@@ -1,0 +1,24 @@
+push_swap/
+├── Makefile
+├── push_swap.h
+├── main.c                 ← punto de entrada, parseo de args
+├── stack.c                ← init_stack, new_node, push_back, push_front, pop_front
+├── stack_free.c           ← free_stack (y si necesitas más funciones de limpieza)
+├── operations_swap.c      ← sa, sb, ss
+├── operations_push.c      ← pa, pb
+├── operations_rotate.c    ← ra, rb, rr
+├── operations_rrotate.c   ← rra, rrb, rrr
+├── sort_simple.c          ← algoritmo O(n²)
+├── sort_medium.c          ← algoritmo O(n√n)
+├── sort_complex.c         ← algoritmo O(n log n)
+├── sort_adaptive.c        ← algoritmo adaptativo
+├── indexer.c              ← asignar index a cada nodo
+├── disorder.c             ← calcular índice de desorden
+├── parse.c                ← validar argumentos, detectar errores
+└── utils.c                ← funciones auxiliares sueltas (ft_atoi, error, etc.)
+
+stack.c	new_node, init_stack, push_back, push_front, pop_front
+stack_free.c	free_stack + helpers de limpieza
+operations_*.c	Las 11 operaciones (sa, pb, ra, etc.)
+parse.c	Validación de argumentos
+utils.c	Solo lo auxiliar que no encaje en otro sitio
