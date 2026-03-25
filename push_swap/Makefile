@@ -8,7 +8,8 @@ SRC = main.c stack.c stack_free.c \
 	  operations_rotate.c operations_reverse_rotate.c \
 	  parse.c parse_utils.c error.c utils.c \
 	  indexer.c disorder.c \
-	  sort_simple.c sort_medium.c sort_complex.c sort_adaptative.c
+	  sort_tiny.c sort_simple.c sort_medium.c sort_complex.c sort_adaptative.c \
+	  bench.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 20:50:54 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/03/21 20:52:47 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:49:02 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	get_max_bits(int size)
 	return (bits);
 }
 
-void	sort_complex(t_stack *a, t_stack *b)
+void	sort_complex(t_stack *a, t_stack *b, t_bench *bench)
 {
 	int	bits;
 	int	size;
@@ -43,13 +43,13 @@ void	sort_complex(t_stack *a, t_stack *b)
 		while (i < size)
 		{
 			if (((a->head->index >> bit) & 1) == 0)
-				pb(a, b);
+				pb(a, b, bench);
 			else
-				ra(a);
+				ra(a, bench);
 			i++;
 		}
 		while (b->size > 0)
-			pa(a, b);
+			pa(a, b, bench);
 		bit++;
 	}
 }

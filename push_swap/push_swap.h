@@ -6,7 +6,7 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 13:16:40 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/03/21 22:17:48 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/03/25 21:01:27 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef enum e_strategy
 	NONE
 }	t_strategy;
 
+typedef struct s_bench
+{
+	int	counts[11];
+	int	total;
+}	t_bench;
+
 /* stack.c */
 t_node		*new_node(int value);
 t_stack		*init_stack(void);
@@ -50,21 +56,21 @@ t_node		*stack_pop_front(t_stack *stack);
 void		free_stack(t_stack *stack);
 
 /* operations */
-void		sa(t_stack *a);
-void		sb(t_stack *b);
-void		ss(t_stack *a, t_stack *b);
-void		pa(t_stack *a, t_stack *b);
-void		pb(t_stack *a, t_stack *b);
-void		ra(t_stack *a);
-void		rb(t_stack *b);
-void		rr(t_stack *a, t_stack *b);
-void		rra(t_stack *a);
-void		rrb(t_stack *b);
-void		rrr(t_stack *a, t_stack *b);
+void		sa(t_stack *a, t_bench *bench);
+void		sb(t_stack *b, t_bench *bench);
+void		ss(t_stack *a, t_stack *b, t_bench *bench);
+void		pa(t_stack *a, t_stack *b, t_bench *bench);
+void		pb(t_stack *a, t_stack *b, t_bench *bench);
+void		ra(t_stack *a, t_bench *bench);
+void		rb(t_stack *b, t_bench *bench);
+void		rr(t_stack *a, t_stack *b, t_bench *bench);
+void		rra(t_stack *a, t_bench *bench);
+void		rrb(t_stack *b, t_bench *bench);
+void		rrr(t_stack *a, t_stack *b, t_bench *bench);
 
 /* parse.c */
 int			parse_flag(char *str);
-t_stack		*parse_args(int argc, char **argv, t_strategy *strat);
+t_stack		*parse_args(int argc, char **argv, t_strategy *strat, int *bench_flag);
 
 /* parse_utils.c */
 int			is_valid_number(const char *str);
@@ -84,9 +90,12 @@ void		assign_index(t_stack *stack);
 double		compute_disorder(t_stack *stack);
 
 /* sort */
-void		sort_simple(t_stack *a, t_stack *b);
-void		sort_medium(t_stack *a, t_stack *b);
-void		sort_complex(t_stack *a, t_stack *b);
-void		sort_adaptive(t_stack *a, t_stack *b);
+void		sort_simple(t_stack *a, t_stack *b, t_bench *bench);
+void		sort_medium(t_stack *a, t_stack *b, t_bench *bench);
+void		sort_complex(t_stack *a, t_stack *b, t_bench *bench);
+void		sort_adaptive(t_stack *a, t_stack *b, t_bench *bench);
+void		sort_tiny(t_stack *a, t_stack *b, t_bench *bench);
+void		push_min_to_b(t_stack *a, t_stack *b, t_bench *bench);
+void		print_bench(t_bench *bench, double disorder, t_strategy strat);
 
 #endif

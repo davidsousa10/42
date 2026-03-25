@@ -6,7 +6,7 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 18:33:05 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/03/21 18:45:52 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:51:23 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	find_min_pos(t_stack *stack)
 	return (min_pos);
 }
 
-static void	push_min_to_b(t_stack *a, t_stack *b)
+void	push_min_to_b(t_stack *a, t_stack *b, t_bench *bench)
 {
 	int	pos;
 
@@ -45,7 +45,7 @@ static void	push_min_to_b(t_stack *a, t_stack *b)
 	{
 		while (pos > 0)
 		{
-			ra(a);
+			ra(a, bench);
 			pos--;
 		}
 	}
@@ -54,23 +54,23 @@ static void	push_min_to_b(t_stack *a, t_stack *b)
 		pos = a->size - pos;
 		while (pos > 0)
 		{
-			rra(a);
+			rra(a, bench);
 			pos--;
 		}
 	}
-	pb(a, b);
+	pb(a, b, bench);
 }
 
-void	sort_simple(t_stack *a, t_stack *b)
+void	sort_simple(t_stack *a, t_stack *b, t_bench *bench)
 {
 	int	size;
 
 	size = a->size;
 	while (a->size > 0)
-		push_min_to_b(a, b);
+		push_min_to_b(a, b, bench);
 	while (size > 0)
 	{
-		pa(a, b);
+		pa(a, b, bench);
 		size--;
 	}
 }

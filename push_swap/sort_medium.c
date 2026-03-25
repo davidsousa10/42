@@ -6,7 +6,7 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 18:49:14 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/03/21 21:18:24 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:53:18 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	find_max_pos(t_stack *stack)
 	return (max_pos);
 }
 
-static void	push_all_back(t_stack *a, t_stack *b)
+static void	push_all_back(t_stack *a, t_stack *b, t_bench *bench)
 {
 	int	pos;
 
@@ -57,7 +57,7 @@ static void	push_all_back(t_stack *a, t_stack *b)
 		{
 			while (pos > 0)
 			{
-				rb(b);
+				rb(b, bench);
 				pos--;
 			}
 		}
@@ -66,15 +66,15 @@ static void	push_all_back(t_stack *a, t_stack *b)
 			pos = b->size - pos;
 			while (pos > 0)
 			{
-				rrb(b);
+				rrb(b, bench);
 				pos--;
 			}
 		}
-		pa(a, b);
+		pa(a, b, bench);
 	}
 }
 
-static void	push_chunk_to_b(t_stack *a, t_stack *b, int min, int max)
+static void	push_chunk_to_b(t_stack *a, t_stack *b, int min, int max, t_bench *bench)
 {
 	int	size;
 
@@ -83,17 +83,17 @@ static void	push_chunk_to_b(t_stack *a, t_stack *b, int min, int max)
 	{
 		if (a->head->index >= min && a->head->index <= max)
 		{
-			pb(a, b);
+			pb(a, b, bench);
 			if (b->size > 1 && b->head->index < min + (max - min) / 2)
-				rb(b);
+				rb(b, bench);
 		}
 		else
-			ra(a);
+			ra(a, bench);
 		size--;
 	}
 }
 
-void	sort_medium(t_stack *a, t_stack *b)
+void	sort_medium(t_stack *a, t_stack *b, t_bench *bench)
 {
 	int	chunk_size;
 	int	min;
@@ -104,11 +104,11 @@ void	sort_medium(t_stack *a, t_stack *b)
 	max = chunk_size - 1;
 	while (min < a->size + b->size)
 	{
-		push_chunk_to_b(a, b, min, max);
+		push_chunk_to_b(a, b, min, max, bench);
 		min += chunk_size;
 		max += chunk_size;
 		if (max >= a->size + b->size)
 			max = a->size + b->size - 1;
 	}
-	push_all_back(a, b);
+	push_all_back(a, b, bench);
 }

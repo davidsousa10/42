@@ -6,21 +6,21 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 21:08:00 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/03/21 21:08:16 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/03/25 20:55:05 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_adaptive(t_stack *a, t_stack *b)
+void	sort_adaptive(t_stack *a, t_stack *b, t_bench *bench)
 {
 	double	disorder;
 
 	disorder = compute_disorder(a);
 	if (disorder < 0.2)
-		sort_simple(a, b);
+		sort_simple(a, b, bench);
 	else if (disorder < 0.5)
-		sort_medium(a, b);
+		sort_medium(a, b, bench);
 	else
-		sort_complex(a, b);
+		sort_complex(a, b, bench);
 }

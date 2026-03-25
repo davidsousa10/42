@@ -3,7 +3,9 @@
     "allow": [
       "Bash(brew install:*)",
       "Bash(pdftoppm -h)",
-      "Bash(pdftotext /Users/davidsousaorta/Documents/42/42school/push_swap/es.subject.pdf -)"
+      "Bash(pdftotext /Users/davidsousaorta/Documents/42/42school/push_swap/es.subject.pdf -)",
+      "Bash(chmod +x /Users/davidsousaorta/Documents/42/42school/push_swap/mega_test.sh)",
+      "Bash(./push_swap --bench --simple 5 4 3 2 1)"
     ]
   }
 }

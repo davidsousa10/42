@@ -6,7 +6,7 @@
 /*   By: dsousa-o <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 17:00:14 by dsousa-o          #+#    #+#             */
-/*   Updated: 2026/03/21 17:35:14 by dsousa-o         ###   ########.fr       */
+/*   Updated: 2026/03/25 21:19:10 by dsousa-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	validate_and_add(t_stack *a, char *str)
 	stack_push_back(a, node);
 }
 
-t_stack	*parse_args(int argc, char **argv, t_strategy *strat)
+t_stack	*parse_args(int argc, char **argv, t_strategy *strat, int *bench_flag)
 {
 	t_stack	*a;
 	int		i;
@@ -53,6 +53,7 @@ t_stack	*parse_args(int argc, char **argv, t_strategy *strat)
 	a = init_stack();
 	if (!a)
 		return (NULL);
+	*bench_flag = 0;
 	*strat = parse_flag(argv[1]);
 	if (*strat == NONE)
 	{
@@ -61,6 +62,16 @@ t_stack	*parse_args(int argc, char **argv, t_strategy *strat)
 	}
 	else
 		i = 2;
+	if (i < argc && ft_strcmp(argv[i], "--bench") == 0)
+	{
+		*bench_flag = 1;
+		i++;
+	}
+	if (i < argc && *strat == ADAPTIVE && parse_flag(argv[i]) != NONE)
+	{
+		*strat = parse_flag(argv[i]);
+		i++;
+	}
 	while (i < argc)
 	{
 		validate_and_add(a, argv[i]);
